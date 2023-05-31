@@ -199,7 +199,7 @@ export const ManagerHome = () => {
           gutterBottom
           sx={{ textAlign: "center", padding: "1rem", fontWeight: "bolder" }}
         >
-          Saved Floor Plans
+          Expense Reports
         </Typography>
         <Accordion
           expanded={true}
@@ -214,7 +214,7 @@ export const ManagerHome = () => {
             id="panel1a-header"
           >
             <Typography sx={{ fontSize: "x-large", fontWeight: "bold" }}>
-              Ready To Go Floor Plans
+              Latest Expense Reports
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -234,7 +234,7 @@ export const ManagerHome = () => {
             </section>
           </AccordionDetails>
         </Accordion>
-        <Accordion
+        {/* <Accordion
           sx={{ padding: "0.5rem" }}
           expanded={true}
           // expanded={expanded === "customFloorPlans"}
@@ -284,7 +284,7 @@ export const ManagerHome = () => {
               />
             </Box>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
       </Box>
     </>
   );

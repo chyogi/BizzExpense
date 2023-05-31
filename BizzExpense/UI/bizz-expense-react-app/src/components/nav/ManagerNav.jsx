@@ -19,7 +19,7 @@ export const ManagerNav = () => {
   const navigate = useNavigate();
   const appUser = JSON.parse(localStorage.getItem("app_user"));
 
-  const pages = ["Reports"];
+  const pages = ["Reports", "Approvals"];
   const settings = ["Profile", "Logout"];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
