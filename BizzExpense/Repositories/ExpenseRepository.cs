@@ -2,24 +2,24 @@
 
 namespace BizzExpense.Repositories
 {
-    public class UsersRepository : IUsersRepository
+    public class ExpenseRepository : IExpenseRepository
     {
-        public void AddUser(Users user)
+        public void AddExpense(Expense expense)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteUser(int userId)
+        public void DeleteExpense(int expenseId)
         {
             throw new NotImplementedException();
         }
 
-        public Users GetUser(int userId)
+        public Expense GetExpenses(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public Users UpdateUser(Users user)
+        public Expense UpdateExpense(Expense expense)
         {
             throw new NotImplementedException();
         }
