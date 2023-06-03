@@ -1,89 +1,114 @@
-CREATE TABLE [users] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
-  [first_name] nvarchar(255),
-  [last_name] nvarchar(255),
-  [address_line_1] nvarchar(255),
-  [address_line_2] nvarchar(255),
-  [city] nvarchar(255),
-  [state] nvarchar(255),
-  [zip] nvarchar(255),
-  [email] nvarchar(255),
-  [manager_id] int,
-  [is_manager] bool,
-  [created_at] timestamp
+CREATE DATABASE [BizzExpense]
+GO
+use [BizzExpense]
+
+CREATE TABLE [Users] (
+  [UserId] int PRIMARY KEY IDENTITY(1, 1),
+  [FirstName] nvarchar(255),
+  [LastName] nvarchar(255),
+  [AddressLine1] nvarchar(255),
+  [AddressLine2] nvarchar(255),
+  [City] nvarchar(255),
+  [State] nvarchar(255),
+  [Zip] nvarchar(255),
+  [EmailId] nvarchar(255),
+  [ManagerId] int,
+  [IsManager] bit,
+  [CreateTS] datetime2
 )
 GO
 
-CREATE TABLE [users_roles] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
-  [user_id] int,
-  [role_id] int,
-  [created_at] timestamp
+CREATE TABLE [UsersRoles] (
+  [UserRoleId] int PRIMARY KEY IDENTITY(1, 1),
+  [UserId] int,
+  [RoleId] int,
+  [CreateTS] datetime2
 )
 GO
 
-CREATE TABLE [status_ref] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
-  [status_description] nvarchar(255),
-  [created_at] timestamp
+CREATE TABLE [StatusRef] (
+  [StatusRefId] int PRIMARY KEY IDENTITY(1, 1),
+  [StatusDescription] nvarchar(255),
+  [CreateTS] datetime2
 )
 GO
 
-CREATE TABLE [roles_ref] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
-  [description] nvarchar(255),
-  [created_at] timestamp
+CREATE TABLE [RolesRef] (
+  [RoleRefId] int PRIMARY KEY IDENTITY(1, 1),
+  [Description] nvarchar(255),
+  [CreateTS] datetime2
 )
 GO
 
-CREATE TABLE [login] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
-  [user_id] int,
-  [firebase_id] nvarchar(255),
-  [created_at] timestamp
+CREATE TABLE [LogIn] (
+  [LogInId] int PRIMARY KEY IDENTITY(1, 1),
+  [UserId] int,
+  [FirebaseId] nvarchar(255),
+  [CreateTS] datetime2
 )
 GO
 
-CREATE TABLE [expenses] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
-  [expense_type] nvarchar(255),
-  [expense_sub_type] nvarchar(255),
-  [expense_amount] decimal,
-  [submitted_by_user_id] int,
-  [created_at] timestamp
+CREATE TABLE [Expenses] (
+  [ExpenseId] int PRIMARY KEY IDENTITY(1, 1),
+  [ExpenseType] nvarchar(255),
+  [ExpenseSubType] nvarchar(255),
+  [ExpenseAmount] decimal(10,2),
+  [SubmittedByUserId] int,
+  [CreateTS] datetime2
 )
 GO
 
-CREATE TABLE [approval_status] (
-  [id] int PRIMARY KEY IDENTITY(1, 1),
-  [expense_id] int,
-  [status_id] int,
-  [message] nvarchar(255),
-  [approver_id] int,
-  [created_at] timestamp
+CREATE TABLE [ApprovalStatus] (
+  [ApprovalStatusId] int PRIMARY KEY IDENTITY(1, 1),
+  [ExpenseId] int,
+  [StatusId] int,
+  [Message] nvarchar(255),
+  [ApproverId] int,
+  [CreateTS] datetime2
 )
 GO
 
-ALTER TABLE [login] ADD FOREIGN KEY ([user_id]) REFERENCES [users] ([id])
-GO
 
-ALTER TABLE [expenses] ADD FOREIGN KEY ([submitted_by_user_id]) REFERENCES [users] ([id])
-GO
+--ALTER TABLE [Login] 
+--ADD CONSTRAINT FK_UserLogin 
+--FOREIGN KEY ([UserId]) REFERENCES [Users] ([UserId])
+--GO
 
-ALTER TABLE [users] ADD FOREIGN KEY ([id]) REFERENCES [users] ([manager_id])
-GO
+--ALTER TABLE [Expenses] 
+--ADD CONSTRAINT FK_UserExpense
+--FOREIGN KEY ([SubmittedByUserId]) REFERENCES [Users] ([UserId])
+--GO
 
-ALTER TABLE [approval_status] ADD FOREIGN KEY ([approver_id]) REFERENCES [users] ([manager_id])
-GO
+--ALTER TABLE [Users] 
+--ADD CONSTRAINT FK_UserUserManagerId
+--FOREIGN KEY ([ManagerId]) REFERENCES [Users] ([UserId])
+--GO
 
-ALTER TABLE [approval_status] ADD FOREIGN KEY ([expense_id]) REFERENCES [expenses] ([id])
-GO
+--CREATE INDEX IDX_ManagerId
+--ON Users (ManagerId);
+--GO 
 
-ALTER TABLE [users_roles] ADD FOREIGN KEY ([user_id]) REFERENCES [users] ([id])
-GO
+--ALTER TABLE [ApprovalStatus] 
+--ADD CONSTRAINT FK_UserApprovalStatusManagerId
+--FOREIGN KEY ([ApproverId]) REFERENCES [Users] ([UserId])
+--GO
 
-ALTER TABLE [users_roles] ADD FOREIGN KEY ([role_id]) REFERENCES [roles_ref] ([id])
-GO
+--ALTER TABLE [ApprovalStatus] 
+--ADD CONSTRAINT FK_ExpenseApprovalStatus
+--FOREIGN KEY ([ExpenseId]) REFERENCES [Expenses] ([ExpenseId])
+--GO
 
-ALTER TABLE [approval_status] ADD FOREIGN KEY ([status_id]) REFERENCES [status_ref] ([id])
-GO
+--ALTER TABLE [UsersRoles] 
+--ADD CONSTRAINT FK_UserUserRole
+--FOREIGN KEY ([UserId]) REFERENCES [Users] ([UserId])
+--GO
+
+--ALTER TABLE [UsersRoles] 
+--ADD CONSTRAINT FK_RoleRefUserRole
+--FOREIGN KEY ([RoleId]) REFERENCES [RolesRef] ([RoleRefId])
+--GO
+
+--ALTER TABLE [ApprovalStatus] 
+--ADD CONSTRAINT FK_StatusRefApprovalStatus
+--FOREIGN KEY ([StatusId]) REFERENCES [StatusRef] ([StatusRefId])
+--GO
