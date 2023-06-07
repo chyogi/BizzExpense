@@ -1,4 +1,5 @@
-﻿using BizzExpense.Repositories;
+﻿using BizzExpense.Models;
+using BizzExpense.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -30,20 +31,31 @@ namespace BizzExpense.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] User user)
         {
+            _userRepository.AddUser(user);
+            return CreatedAtAction("Get", new { id = user.UserId }, user);
         }
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] User user)
         {
+            if (id != user.UserId)
+            {
+                return BadRequest();
+            }
+            _userRepository.UpdateUser(user);
+
+            return Ok(user);
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _userRepository.DeleteUser(id);
+            return NoContent();
         }
     }
 }

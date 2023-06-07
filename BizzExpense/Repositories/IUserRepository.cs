@@ -6,7 +6,8 @@ namespace BizzExpense.Repositories
     {
         User GetUser(int userId);
         void AddUser(User user);
-        User UpdateUser(User user);
+        void UpdateUser(User user);
         void DeleteUser(int userId);
+
     }
 }
