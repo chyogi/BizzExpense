@@ -1,0 +1,120 @@
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (61,4),
+  (51,3),
+  (27,3),
+  (94,5),
+  (2,4),
+  (60,2),
+  (59,3),
+  (47,2),
+  (19,2),
+  (15,4);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (87,4),
+  (82,2),
+  (32,5),
+  (60,2),
+  (93,4),
+  (78,4),
+  (87,3),
+  (32,1),
+  (42,2),
+  (11,4);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (45,4),
+  (93,4),
+  (9,4),
+  (30,1),
+  (58,3),
+  (18,3),
+  (50,2),
+  (19,2),
+  (87,2),
+  (63,3);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (56,5),
+  (51,1),
+  (8,3),
+  (61,3),
+  (52,1),
+  (66,4),
+  (79,2),
+  (29,4),
+  (38,2),
+  (62,4);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (85,4),
+  (16,1),
+  (82,4),
+  (61,3),
+  (17,4),
+  (49,2),
+  (35,4),
+  (52,1),
+  (32,1),
+  (60,4);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (27,4),
+  (19,4),
+  (2,2),
+  (31,4),
+  (43,4),
+  (31,4),
+  (17,5),
+  (55,3),
+  (48,4),
+  (59,1);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (15,3),
+  (59,5),
+  (8,3),
+  (22,1),
+  (15,4),
+  (14,4),
+  (99,4),
+  (45,4),
+  (31,3),
+  (2,1);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (86,2),
+  (53,2),
+  (53,4),
+  (74,3),
+  (69,4),
+  (21,1),
+  (50,4),
+  (78,2),
+  (34,5),
+  (33,3);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (94,3),
+  (38,4),
+  (59,4),
+  (71,4),
+  (34,2),
+  (95,5),
+  (69,3),
+  (98,5),
+  (67,2),
+  (25,4);
+INSERT INTO [UsersRoles] (UserId,RoleId)
+VALUES
+  (68,4),
+  (68,2),
+  (64,4),
+  (68,5),
+  (2,3),
+  (30,5),
+  (24,4),
+  (39,1),
+  (17,3),
+  (28,3);

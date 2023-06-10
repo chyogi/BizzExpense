@@ -12,6 +12,7 @@ namespace BizzExpense
 
             builder.Services.AddControllers();
 
+            builder.Services.AddTransient<IUserRoleRepository,UserRoleRepository>();
             builder.Services.AddTransient<IUserRepository, UserRepository>();
             builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
             builder.Services.AddTransient<ILoginRepository, LoginRepository>();

@@ -30,12 +30,52 @@ namespace BizzExpense.Controllers
 
         // GET api/<ExpensesController>/5
         [HttpGet("[action]/{userId}")]
-        public IActionResult GetExpensesByUser(int userId)
+        public IActionResult ExpensesByUser(int userId)
         {
             var userExpenses = _expenseRepository.GetExpenses(userId);
             if (userExpenses == null) { return NotFound(); }
 
             return Ok(userExpenses);
+        }
+
+        // GET api/<ExpensesController>/5
+        [HttpGet("[action]/{approverId}")]
+        public IActionResult ExpensesByUserApprover(int approverId)
+        {
+            var expensesByApprover = _expenseRepository.GetExpensesByApprover(approverId);
+            if (expensesByApprover == null) { return NotFound(); }
+
+            return Ok(expensesByApprover);
+        }
+
+        // GET api/<ExpensesController>/5
+        [HttpGet("[action]/")]
+        public IActionResult AllExpenseTypes()
+        {
+            var expenseTypes = _expenseRepository.GetAllExpenseTypes();
+            if (expenseTypes == null) { return NotFound(); }
+
+            return Ok(expenseTypes);
+        }
+
+        // GET api/<ExpensesController>/5
+        [HttpGet("[action]/")]
+        public IActionResult AllExpenseSubTypes()
+        {
+            var expenseSubTypes = _expenseRepository.GetAllExpenseSubTypes();
+            if (expenseSubTypes == null) { return NotFound(); }
+
+            return Ok(expenseSubTypes);
+        }
+
+        // GET api/<ExpensesController>/5
+        [HttpGet("[action]/")]
+        public IActionResult AllApprovalStatuses ()
+        {
+            var approvalStatuses = _expenseRepository.GetAllApprovalStatus();
+            if (approvalStatuses == null) { return NotFound(); }
+
+            return Ok(approvalStatuses);
         }
 
         // POST api/<ExpensesController>
@@ -62,7 +102,7 @@ namespace BizzExpense.Controllers
 
         // PUT api/<ExpensesController>/5
         [HttpPut("[action]/{id}")]
-        public IActionResult UpdateExpenseStatus(int id, [FromBody] ApprovalStatus approvalStatus)
+        public IActionResult ExpenseStatus(int id, [FromBody] ApprovalStatus approvalStatus)
         {
             if (id != approvalStatus.ExpenseId)
             {
