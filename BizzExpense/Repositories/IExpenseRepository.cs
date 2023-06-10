@@ -7,6 +7,10 @@ namespace BizzExpense.Repositories
     {
         ExpenseDto GetExpense(int expenseId);
         IList<ExpenseDto> GetExpenses(int userId);
+        IList<ExpenseDto> GetExpensesByApprover(int approverId);
+        IList<ExpenseTypeRef> GetAllExpenseTypes();
+        IList<ExpenseSubTypeRef> GetAllExpenseSubTypes();
+        IList<StatusRef> GetAllApprovalStatus();
         void AddExpense(AddExpenseDto addExpenseDto);
         void UpdateExpense(Expense expense);
         void UpdateExpenseStatus(ApprovalStatus approvalStatus);

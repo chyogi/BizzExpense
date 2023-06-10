@@ -158,3 +158,13 @@ ALTER TABLE [ExpenseSubTypesRef]
 ADD CONSTRAINT FK_ExpenseTypesRefExpenseSubTypesRef
 FOREIGN KEY ([ExpenseTypeId]) REFERENCES [ExpenseTypesRef]  ([ExpenseTypeRefId])
 GO
+
+ALTER TABLE [Expenses] 
+ADD CONSTRAINT FK_ExpenseTypesRef_Expense
+FOREIGN KEY ([ExpenseTypeId]) REFERENCES [dbo].[ExpenseTypesRef] ([ExpenseTypeRefId])
+GO
+
+ALTER TABLE [Expenses] 
+ADD CONSTRAINT FK_ExpenseSubTypesRef_Expense
+FOREIGN KEY ([ExpenseSubTypeId]) REFERENCES [dbo].[ExpenseSubTypesRef] ([ExpenseSubTypeRefId])
+GO
