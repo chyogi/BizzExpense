@@ -40,7 +40,7 @@ namespace BizzExpense.Controllers
 
         // GET api/<ExpensesController>/5
         [HttpGet("[action]/{approverId}")]
-        public IActionResult ExpensesByUserApprover(int approverId)
+        public IActionResult ExpensesByApprover(int approverId)
         {
             var expensesByApprover = _expenseRepository.GetExpensesByApprover(approverId);
             if (expensesByApprover == null) { return NotFound(); }
