@@ -13,6 +13,17 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
+    // localStorage.setItem(
+    //   "app_user",
+    //   JSON.stringify({
+    //     id: 1,
+    //     firstName: "",
+    //     lastName: "",
+    //     email: email,
+    //     isManager: true,
+    //   })
+    // );
+    // navigate("/home");
     return fetch(`http://localhost:8088/users?email=${email}`)
       .then((res) => res.json())
       .then((foundUsers) => {
