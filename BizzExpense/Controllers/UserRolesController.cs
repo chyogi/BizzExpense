@@ -15,9 +15,19 @@ namespace BizzExpense.Controllers
         {
                 _userRoleRepository = userRoleRepository;
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var userRole = _userRoleRepository.GetUserRole(id);
+            if (userRole == null) { return NotFound(); }
+
+            return Ok(userRole);
+        }
+
         // GET: api/<UserRolesController>
-        [HttpGet("{userId}")]
-        public IActionResult Get(int userId)
+        [HttpGet("[action]/{userId}")]
+        public IActionResult userRolesByUserId(int userId)
         {
             var userRoles = _userRoleRepository.GetUserRoles(userId);
             if (userRoles == null) { return NotFound(); }
@@ -43,21 +53,32 @@ namespace BizzExpense.Controllers
         //}
 
         // POST api/<UserRolesController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        [HttpPost]
+        public IActionResult Post([FromBody] UserRole userRole)
+        {
+            _userRoleRepository.AddUserRole(userRole);
+            return CreatedAtAction("Get", new { id = userRole.UserRoleId }, userRole);
+        }
 
         // PUT api/<UserRolesController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-    }
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] UserRole userRole)
+        {
+            if (id != userRole.UserRoleId)
+            {
+                return BadRequest();
+            }
+            _userRoleRepository.UpdateUserRole(userRole);
+
+            return Ok(userRole);
+        }
 
         // DELETE api/<UserRolesController>/5
-    //    [HttpDelete("{id}")]
-    //    public void Delete(int id)
-    //    {
-    //    }
-    //}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _userRoleRepository.DeleteUserRole(id);
+            return NoContent();
+        }
+    }
 }
