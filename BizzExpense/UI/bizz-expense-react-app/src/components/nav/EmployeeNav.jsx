@@ -171,8 +171,25 @@ export const EmployeeNav = () => {
                   key={setting}
                   onClick={() => {
                     if (setting.toLowerCase() === "logout") {
-                      localStorage.clear();
-                      navigate(`/`);
+                      const options = {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(""),
+                      };
+                      return fetch(
+                        `http://localhost:8088/api/Login/logout`,
+                        options
+                      ).then((res) => {
+                        console.log("logout", res);
+                        if (res.ok) {
+                          localStorage.clear();
+                          navigate(`/`);
+                        } else {
+                          window.alert("error logging out");
+                        }
+                      });
                     }
                     navigate(`/${setting.toLowerCase()}`);
                   }}

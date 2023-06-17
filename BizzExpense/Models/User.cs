@@ -15,9 +15,9 @@
         public int? ManagerId { get; set; }
 
         public bool? IsManager { get; set; }
-        public DateTime? CreateTS { get; set; }
+        public DateTime? CreateTS { get; set; } = DateTime.Now;
         public int? CreatedBy { get; set; }
-        public DateTime? UpdateTS { get; set; }
-        public int? UpdatedBy { get; set; }
+        public DateTime? UpdateTS { get; set; } = DateTime.Now;
+        public int? UpdatedBy { get; set; } 
     }
 }

@@ -12,6 +12,8 @@ import { AboutUs } from "../home/AboutUs";
 import Profile from "../profile/Profile";
 import { EmployeeHome } from "../home/EmployeeHome";
 import { ManagerHome } from "../home/ManagerHome";
+import ExpensesContainer from "../expenses/ExpensesContainer";
+import ApprovalsContainer from "../approvals/ApprovalsContainer";
 
 export const ManagerView = () => {
   return (
@@ -48,7 +50,10 @@ export const ManagerView = () => {
         }
       >
         <Route path="home" element={<ManagerHome />} />
-        <Route path="floor-plans" element={<FloorPlansList />} />
+        <Route path="reports" element={<ExpensesContainer />} />
+        <Route path="approvals" element={<ApprovalsContainer />} />
+        <Route path="profile" element={<Profile />} />
+        {/* <Route path="floor-plans" element={<FloorPlansList />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="profile" element={<Profile />} />
         <Route path="custom-floor-plans" element={<CustomFloorPlansList />} />
@@ -60,7 +65,7 @@ export const ManagerView = () => {
           path="custom-floor-plans/edit"
           element={<EditCustomFloorPlan />}
         />
-        <Route path="floor-plans/:floorPlanId" element={<FloorPlanDetails />} />
+        <Route path="floor-plans/:floorPlanId" element={<FloorPlanDetails />} /> */}
       </Route>
     </Routes>
   );

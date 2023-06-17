@@ -18,7 +18,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { FloorPlans } from "../floorPlans/FloorPlans";
-import "./Home.css";
+// import "./Home.css";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -28,8 +28,9 @@ import AddIcon from "@mui/icons-material/Add";
 import { DataGrid } from "@mui/x-data-grid";
 import AddExpense from "../expenses/AddExpense";
 import Expense from "../expenses/Expense";
+import Approval from "./Approval";
 
-export const ManagerHome = () => {
+const ApprovalsContainer = () => {
   const [isCreateExpense, setIsCreateExpense] = useState(false);
   const [refreshExpense, setRefreshExpense] = useState(false);
   const [allExpenses, setAllExpenses] = useState([]);
@@ -69,7 +70,7 @@ export const ManagerHome = () => {
       };
 
       const response = await fetch(
-        `http://localhost:8088/api/Expenses/ExpensesByUser/${appUser.user.userId}`,
+        `http://localhost:8088/api/Expenses/ExpensesByApprover/${appUser.user.userId}`,
         options
       );
 
@@ -89,42 +90,12 @@ export const ManagerHome = () => {
     <>
       <Box sx={{ width: "100%", height: "100%" }}>
         <Typography
-          variant="h4"
+          variant="h3"
           gutterBottom
-          sx={{ textAlign: "left", marginLeft: "2%", marginTop: "2%" }}
+          sx={{ textAlign: "Center", marginLeft: "2%", marginTop: "2%" }}
         >
-          {`Welcome ${appUser.user.firstName} ${appUser.user.lastName}`}
+          {`Expense Reports in Approval Queue`}
         </Typography>
-        <Box sx={{ marginLeft: "2%", marginTop: "2%", height: "30%" }}>
-          <Button
-            sx={{
-              backgroundColor: "#a8dadc",
-              width: "30%",
-              height: "90%",
-              fontSize: "large",
-              fontWeight: "bold",
-              color: "#1f2421",
-              "&:hover": {
-                background: "#a8dadc",
-              },
-            }}
-            variant="contained"
-            onClick={() => {
-              setIsCreateExpense(true);
-            }}
-          >
-            <AddIcon
-              sx={{
-                height: "70%",
-                width: "70%",
-              }}
-            />
-          </Button>
-        </Box>
-
-        {isCreateExpense && (
-          <AddExpense returnToCaller={toggleCreateExpenseButton} />
-        )}
 
         <Accordion sx={{ padding: "0.5rem" }}>
           <AccordionSummary
@@ -136,7 +107,7 @@ export const ManagerHome = () => {
             id="panel1a-header"
           >
             <Typography sx={{ fontSize: "x-large", fontWeight: "bold" }}>
-              Previous Expense Reports
+              Pending Approvals
             </Typography>
           </AccordionSummary>
           <AccordionDetails
@@ -149,18 +120,58 @@ export const ManagerHome = () => {
               gap: "10px 30px",
             }}
           >
-            {allExpenses.map((x, index) => {
-              return (
-                <Expense
-                  key={index}
-                  expenseDetail={x}
-                  toggleRefreshExpense={toggleRefreshExpense}
-                />
-              );
-            })}
+            {allExpenses
+              .filter((x) => x.statusId === 1)
+              .map((x, index) => {
+                return (
+                  <Approval
+                    key={index}
+                    expenseDetail={x}
+                    toggleRefreshExpense={toggleRefreshExpense}
+                  />
+                );
+              })}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion sx={{ padding: "0.5rem" }}>
+          <AccordionSummary
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
+            sx={{ background: "#457b9d", color: "#fff" }}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography sx={{ fontSize: "x-large", fontWeight: "bold" }}>
+              Previous Decisioned Reports
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "flex-start",
+              alignContent: "center",
+              gap: "10px 30px",
+            }}
+          >
+            {allExpenses
+              .filter((x) => x.statusId !== 1)
+              .map((x, index) => {
+                return (
+                  <Approval
+                    key={index}
+                    expenseDetail={x}
+                    toggleRefreshExpense={toggleRefreshExpense}
+                  />
+                );
+              })}
           </AccordionDetails>
         </Accordion>
       </Box>
     </>
   );
 };
+
+export default ApprovalsContainer;

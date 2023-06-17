@@ -5,7 +5,7 @@ export const NavBar = () => {
   const appUser = localStorage.getItem("app_user");
   const appUserObject = JSON.parse(appUser);
 
-  if (appUserObject.isManager) {
+  if (appUserObject.user.isManager) {
     return <ManagerNav />;
   } else {
     return <EmployeeNav />;

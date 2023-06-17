@@ -196,9 +196,9 @@ namespace BizzExpense.Repositories
                             Comments = DbUtils.GetString(reader, "Comments"),
                             ApproverId = DbUtils.GetInt(reader, "ApproverId"),
                             ApprovalCreatedTS = DbUtils.GetNullableDateTime(reader, "ApprovalCreatedTS"),
-                            ApprovalCreatedByUserId = DbUtils.GetInt(reader, "ApprovalCreatedBy"),
+                            ApprovalCreatedByUserId = DbUtils.GetNullableInt(reader, "ApprovalCreatedBy"),
                             ApprovalUpdatedTS = DbUtils.GetNullableDateTime(reader, "ApprovalUpdatedTS"),
-                            ApprovalUpdatedByUserId = DbUtils.GetInt(reader, "ApprovalUpdatedBy"),
+                            ApprovalUpdatedByUserId = DbUtils.GetNullableInt(reader, "ApprovalUpdatedBy"),
                         });
 
                     }
@@ -266,18 +266,18 @@ namespace BizzExpense.Repositories
                             ExpenseAmount = DbUtils.GetNullableDecimal(reader, "ExpenseAmount"),
                             SubmittedByUserId = DbUtils.GetInt(reader, "SubmittedByUserId"),
                             ExpenseCreatedTS = DbUtils.GetNullableDateTime(reader, "ExpenseCreatedTS"),
-                            ExpenseCreatedByUserId = DbUtils.GetInt(reader, "ExpenseCreatedBy"),
+                            ExpenseCreatedByUserId = DbUtils.GetNullableInt(reader, "ExpenseCreatedBy"),
                             ExpenseUpdatedTS = DbUtils.GetNullableDateTime(reader, "ExpenseUpdatedTS"),
-                            ExpenseUpdatedByUserId = DbUtils.GetInt(reader, "ExpenseUpdatedBy"),
+                            ExpenseUpdatedByUserId = DbUtils.GetNullableInt(reader, "ExpenseUpdatedBy"),
                             ApprovalStatusId = DbUtils.GetInt(reader, "ApprovalStatusId"),
                             StatusId = DbUtils.GetInt(reader, "StatusId"),
                             StatusDescription = DbUtils.GetString(reader, "StatusDescription"),
                             Comments = DbUtils.GetString(reader, "Comments"),
                             ApproverId = DbUtils.GetInt(reader, "ApproverId"),
                             ApprovalCreatedTS = DbUtils.GetNullableDateTime(reader, "ApprovalCreatedTS"),
-                            ApprovalCreatedByUserId = DbUtils.GetInt(reader, "ApprovalCreatedBy"),
+                            ApprovalCreatedByUserId = DbUtils.GetNullableInt(reader, "ApprovalCreatedBy"),
                             ApprovalUpdatedTS = DbUtils.GetNullableDateTime(reader, "ApprovalUpdatedTS"),
-                            ApprovalUpdatedByUserId = DbUtils.GetInt(reader, "ApprovalUpdatedBy"),
+                            ApprovalUpdatedByUserId = DbUtils.GetNullableInt(reader, "ApprovalUpdatedBy"),
                         });
 
                     }
@@ -315,9 +315,9 @@ namespace BizzExpense.Repositories
                             ExpenseTypeRefId = DbUtils.GetInt(reader, "ExpenseTypeRefId"),
                             ExpenseTypeDescription = DbUtils.GetString(reader, "ExpenseTypeDescription"),
                             CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-                            CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+                            CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
                             UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-                            UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+                            UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
                         });
 
                     }
@@ -357,9 +357,9 @@ namespace BizzExpense.Repositories
                             ExpenseTypeId = DbUtils.GetInt(reader, "ExpenseTypeId"),
                             ExpenseSubTypeDescription = DbUtils.GetString(reader, "ExpenseSubTypeDescription"),
                             CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-                            CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+                            CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
                             UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-                            UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+                            UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
                         });
 
                     }
@@ -397,9 +397,9 @@ namespace BizzExpense.Repositories
                             StatusRefId = DbUtils.GetInt(reader, "StatusRefId"),
                             StatusDescription = DbUtils.GetString(reader, "StatusDescription"),
                             CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-                            CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+                            CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
                             UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-                            UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+                            UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
                         });
 
                     }
@@ -476,9 +476,9 @@ namespace BizzExpense.Repositories
                             Comments = DbUtils.GetString(reader, "Comments"),
                             ApproverId = DbUtils.GetInt(reader, "ApproverId"),
                             ApprovalCreatedTS = DbUtils.GetNullableDateTime(reader, "ApprovalCreatedTS"),
-                            ApprovalCreatedByUserId = DbUtils.GetInt(reader, "ApprovalCreatedBy"),
+                            ApprovalCreatedByUserId = DbUtils.GetNullableInt(reader, "ApprovalCreatedBy"),
                             ApprovalUpdatedTS = DbUtils.GetNullableDateTime(reader, "ApprovalUpdatedTS"),
-                            ApprovalUpdatedByUserId = DbUtils.GetInt(reader, "ApprovalUpdatedBy"),
+                            ApprovalUpdatedByUserId = DbUtils.GetNullableInt(reader, "ApprovalUpdatedBy"),
 
                         };
 

@@ -26,6 +26,12 @@ namespace BizzExpense.Controllers
         //    return new string[] { "value1", "value2" };
         //}
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            return Ok();
+        }
+
         // POST api/<LoginController>
         [HttpPost]
         public IActionResult Post([FromBody] LoginRequest loginRequest)
@@ -40,6 +46,13 @@ namespace BizzExpense.Controllers
         public IActionResult LogOut()
         {
             return NoContent();
+        }
+
+        [HttpPost("[action]/")]
+        public IActionResult Register([FromBody] RegisterDto registerDto)
+        {
+            _loginRepository.RegisterUser(registerDto);
+            return CreatedAtAction("Get", new { id = registerDto.LogInId }, registerDto);
         }
 
         // POST api/<LoginController>
