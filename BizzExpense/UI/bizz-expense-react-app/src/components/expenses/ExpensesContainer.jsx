@@ -18,7 +18,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { FloorPlans } from "../floorPlans/FloorPlans";
-import "./Home.css";
+// import "./Home.css";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -29,7 +29,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import AddExpense from "../expenses/AddExpense";
 import Expense from "../expenses/Expense";
 
-export const ManagerHome = () => {
+const ExpensesContainer = () => {
   const [isCreateExpense, setIsCreateExpense] = useState(false);
   const [refreshExpense, setRefreshExpense] = useState(false);
   const [allExpenses, setAllExpenses] = useState([]);
@@ -89,11 +89,11 @@ export const ManagerHome = () => {
     <>
       <Box sx={{ width: "100%", height: "100%" }}>
         <Typography
-          variant="h4"
+          variant="h3"
           gutterBottom
-          sx={{ textAlign: "left", marginLeft: "2%", marginTop: "2%" }}
+          sx={{ textAlign: "Center", marginLeft: "2%", marginTop: "2%" }}
         >
-          {`Welcome ${appUser.user.firstName} ${appUser.user.lastName}`}
+          {`Expense Reports`}
         </Typography>
         <Box sx={{ marginLeft: "2%", marginTop: "2%", height: "30%" }}>
           <Button
@@ -164,3 +164,5 @@ export const ManagerHome = () => {
     </>
   );
 };
+
+export default ExpensesContainer;

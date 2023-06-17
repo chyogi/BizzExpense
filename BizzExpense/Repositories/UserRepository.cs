@@ -72,7 +72,7 @@ namespace BizzExpense.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM [dbo].[Users] " +
+                    cmd.CommandText = "DELETE FROM [dbo].[LogIn] " +
                                         "WHERE [UserId] = @UserId;";
                     DbUtils.AddParameter(cmd, "@UserId", userId);
 
@@ -126,9 +126,9 @@ namespace BizzExpense.Repositories
                             ManagerId = DbUtils.GetInt(reader, "ManagerId"),
                             IsManager = DbUtils.GetNullableBool(reader, "IsManager"),
                             CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-                            CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+                            CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
                             UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-                            UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+                            UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
                         };
 
                     }
@@ -154,11 +154,10 @@ namespace BizzExpense.Repositories
                                               ,[City] = @City
                                               ,[State] = @State 
                                               ,[Zip] = @Zip 
-                                              ,[EmailId] = @EmailId 
                                               ,[ManagerId] = @ManagerId 
                                               ,[IsManager] = @IsManager 
-                                              ,[CreatedBy] = @CreatedBy
                                               ,[UpdatedBy] = @UpdatedBy
+                                              ,[UpdateTS] = @UpdateTS
                                         WHERE [UserId] = @UserId;";
                     DbUtils.AddParameter(cmd, "@UserId", user.UserId);
                     DbUtils.AddParameter(cmd, "@FirstName", user.FirstName);
@@ -168,11 +167,12 @@ namespace BizzExpense.Repositories
                     DbUtils.AddParameter(cmd, "@City", user.City);
                     DbUtils.AddParameter(cmd, "@State", user.State);
                     DbUtils.AddParameter(cmd, "@Zip", user.Zip);
-                    DbUtils.AddParameter(cmd, "@EmailId", user.EmailId);
+                    //DbUtils.AddParameter(cmd, "@EmailId", user.EmailId);
                     DbUtils.AddParameter(cmd, "@ManagerId", user.ManagerId);
                     DbUtils.AddParameter(cmd, "@IsManager", user.IsManager);
-                    DbUtils.AddParameter(cmd, "@CreatedBy", user.CreatedBy);
+                    //DbUtils.AddParameter(cmd, "@CreatedBy", user.CreatedBy);
                     DbUtils.AddParameter(cmd, "@UpdatedBy", user.UpdatedBy);
+                    DbUtils.AddParameter(cmd, "@UpdateTS", user.UpdateTS);
 
 
                     cmd.ExecuteNonQuery();

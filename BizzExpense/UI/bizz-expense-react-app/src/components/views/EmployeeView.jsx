@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import { AboutUs } from "../home/AboutUs";
 import Profile from "../profile/Profile";
 import { EmployeeHome } from "../home/EmployeeHome";
+import ExpensesContainer from "../expenses/ExpensesContainer";
 
 export const EmployeeView = () => {
   return (
@@ -19,10 +20,7 @@ export const EmployeeView = () => {
         path="/"
         element={
           <Box>
-            <Box>
-              <Outlet />
-            </Box>
-
+            <Outlet />
             <Box
               sx={{
                 // marginTop: "10vh",
@@ -47,7 +45,9 @@ export const EmployeeView = () => {
         }
       >
         <Route path="home" element={<EmployeeHome />} />
-        <Route path="floor-plans" element={<FloorPlansList />} />
+        <Route path="reports" element={<ExpensesContainer />} />
+        <Route path="profile" element={<Profile />} />
+        {/* <Route path="floor-plans" element={<FloorPlansList />} />
         <Route path="about-us" element={<AboutUs />} />
         <Route path="profile" element={<Profile />} />
         <Route path="custom-floor-plans" element={<CustomFloorPlansList />} />
@@ -59,7 +59,7 @@ export const EmployeeView = () => {
           path="custom-floor-plans/edit"
           element={<EditCustomFloorPlan />}
         />
-        <Route path="floor-plans/:floorPlanId" element={<FloorPlanDetails />} />
+        <Route path="floor-plans/:floorPlanId" element={<FloorPlanDetails />} /> */}
       </Route>
     </Routes>
   );

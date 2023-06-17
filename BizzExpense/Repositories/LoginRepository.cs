@@ -1,6 +1,7 @@
 ﻿using BizzExpense.Models;
 using BizzExpense.Models.Dtos;
 using BizzExpense.Utils;
+using Microsoft.Data.SqlClient;
 
 namespace BizzExpense.Repositories
 {
@@ -18,7 +19,7 @@ namespace BizzExpense.Repositories
 				using (var cmd = conn.CreateCommand())
 				{
 					cmd.CommandText = @"
-										  SELECT 
+										  SELECT top 1
 										  ur1.[RoleId]
 										  ,rr1.[RoleDescription]
 										  ,l1.[FirebaseId]
@@ -42,6 +43,7 @@ namespace BizzExpense.Repositories
 										  INNER JOIN [dbo].[UsersRoles] ur1 on ur1.[UserId] = u1.[UserId]
 										  INNER JOIN [dbo].[RolesRef] rr1 on rr1.RoleRefId = ur1.RoleId
 										  where u1.[EmailId] = @EmailId
+										order by u1.[UserId] desc
 										"
 					;
 
@@ -68,9 +70,9 @@ namespace BizzExpense.Repositories
 							ManagerId = DbUtils.GetInt(reader, "ManagerId"),
 							IsManager = DbUtils.GetNullableBool(reader, "IsManager"),
 							CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-							CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+							CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
 							UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-							UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+							UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
 						};
 
 						loginResponse = new LoginResponse()
@@ -85,6 +87,33 @@ namespace BizzExpense.Repositories
 					}
 					reader.Close();
 					return loginResponse;
+				}
+			}
+		}
+
+		public void RegisterUser(RegisterDto registerDto)
+		{
+			using (SqlConnection conn = Connection)
+			{
+				conn.Open();
+				using (SqlCommand cmd = conn.CreateCommand())
+				{
+					cmd.CommandText = @"INSERT INTO [dbo].[LogIn]
+												   ([UserId]
+												   ,[FirebaseId]
+													)
+
+
+													OUTPUT INSERTED.LogInId
+
+													VALUES (
+													@UserId
+													,@FirebaseId
+													)";
+					DbUtils.AddParameter(cmd, "@UserId", registerDto.UserId);
+					DbUtils.AddParameter(cmd, "@FirebaseId", registerDto.FirebaseId);
+
+					registerDto.LogInId = (int)cmd.ExecuteScalar();
 				}
 			}
 		}

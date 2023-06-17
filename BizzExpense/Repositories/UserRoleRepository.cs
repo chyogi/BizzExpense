@@ -43,9 +43,9 @@ namespace BizzExpense.Repositories
 							RoleId = DbUtils.GetInt(reader, "RoleId"),
 							RoleDescription = DbUtils.GetString(reader, "RoleDescription"),
 							CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-							CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+							CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
 							UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-							UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+							UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
 
 						};
 
@@ -91,9 +91,9 @@ namespace BizzExpense.Repositories
 							RoleId = DbUtils.GetInt(reader, "RoleId"),
 							RoleDescription = DbUtils.GetString(reader, "RoleDescription"),
 							CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-							CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+							CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
 							UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-							UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+							UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
 
 						});
 
@@ -131,9 +131,9 @@ namespace BizzExpense.Repositories
 							RoleRefId = DbUtils.GetInt(reader, "RoleRefId"),
 							RoleDescription = DbUtils.GetString(reader, "RoleDescription"),
 							CreateTS = DbUtils.GetNullableDateTime(reader, "CreateTS"),
-							CreatedBy = DbUtils.GetInt(reader, "CreatedBy"),
+							CreatedBy = DbUtils.GetNullableInt(reader, "CreatedBy"),
 							UpdateTS = DbUtils.GetNullableDateTime(reader, "UpdateTS"),
-							UpdatedBy = DbUtils.GetInt(reader, "UpdatedBy"),
+							UpdatedBy = DbUtils.GetNullableInt(reader, "UpdatedBy"),
 						});
 
 					}

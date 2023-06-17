@@ -23,13 +23,30 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
 import { DataGrid } from "@mui/x-data-grid";
+import AddExpense from "../expenses/AddExpense";
+import Expense from "../expenses/Expense";
 
 export const EmployeeHome = () => {
-  const [floorPlanList, setFloorPlanList] = useState([]);
-  const [customFloorPlanList, setCustomFloorPlanList] = useState([]);
-  const [expanded, setExpanded] = React.useState("readyToGoPlans");
-  const [favsChanged, setFavsChanged] = useState("");
+  const [isCreateExpense, setIsCreateExpense] = useState(false);
+  const [refreshExpense, setRefreshExpense] = useState(false);
+  const [allExpenses, setAllExpenses] = useState([]);
+
+  const toggleCreateExpenseButton = () => {
+    setIsCreateExpense(!isCreateExpense);
+  };
+
+  const toggleRefreshExpense = () => {
+    setRefreshExpense(!refreshExpense);
+  };
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -38,254 +55,114 @@ export const EmployeeHome = () => {
 
   const appUser = JSON.parse(localStorage.getItem("app_user"));
 
-  const columns = [
-    { field: "id", headerName: "ID", width: 50 },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 170,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Name"}</strong>,
-    },
-    {
-      field: "type",
-      headerName: "Type",
-      width: 130,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Type"}</strong>,
-    },
-    {
-      field: "stories",
-      headerName: "Stories",
-      type: "number",
-      width: 80,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Stories"}</strong>,
-    },
-    {
-      field: "sqFt",
-      headerName: "Sq Ft",
-      type: "number",
-      width: 80,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Sq Ft"}</strong>,
-    },
-    {
-      field: "bedrooms",
-      headerName: "Bedrooms",
-      type: "number",
-      width: 100,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Bedrooms"}</strong>,
-    },
-    {
-      field: "fullBaths",
-      headerName: "Full Baths",
-      type: "number",
-      width: 100,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Full Baths"}</strong>,
-    },
-    {
-      field: "halfBaths",
-      headerName: "Half Baths",
-      type: "number",
-      width: 100,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Half Baths"}</strong>,
-    },
-    {
-      field: "garage",
-      headerName: "Garage",
-      type: "number",
-      width: 100,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Garage"}</strong>,
-    },
-    {
-      field: "isFav",
-      headerName: "Fav?",
-      type: "text",
-      width: 90,
-      headerAlign: "center",
-      align: "center",
-      renderHeader: () => <strong>{"Fav?"}</strong>,
-    },
-    {
-      field: "price",
-      headerName: "Price",
-      type: "number",
-      width: 180,
-      headerAlign: "center",
-      renderHeader: () => <strong>{"Price"}</strong>,
-      valueGetter: (params) => {
-        return currencyFormatter.format(
-          isNaN(params.row.price) ? 0.0 : params.row.price
-        );
-      },
-    },
-  ];
-
   const accordingChangeHandler = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  useEffect(
-    () => {
-      const fetchReadyToGoFloorPlanData = async () => {
-        const response = await fetch(
-          `http://localhost:8088/savedFloorPlans?userId=${appUser.id}&_expand=readyToGoFloorPlan`
-        );
-        const floorPlanListFromAPI = await response.json();
-        setFloorPlanList(floorPlanListFromAPI);
+  useEffect(() => {
+    const getAllExpenses = async () => {
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       };
-      fetchReadyToGoFloorPlanData();
 
-      const fetchCustomFloorPlanData = async () => {
-        const response = await fetch(
-          `http://localhost:8088/customFloorPlans?userId=${appUser.id}&isFav=true`
-        );
-        const customFloorPlanListFromAPI = await response.json();
-        setCustomFloorPlanList(customFloorPlanListFromAPI);
-      };
-      fetchCustomFloorPlanData();
-    },
-    [] // When this array is empty, you are observing initial component state
-  );
+      const response = await fetch(
+        `http://localhost:8088/api/Expenses/ExpensesByUser/${appUser.user.userId}`,
+        options
+      );
 
-  useEffect(
-    () => {
-      const fetchReadyToGoFloorPlanData = async () => {
-        const response = await fetch(
-          `http://localhost:8088/savedFloorPlans?userId=${appUser.id}&_expand=readyToGoFloorPlan`
-        );
-        const floorPlanListFromAPI = await response.json();
-        setFloorPlanList(floorPlanListFromAPI);
-      };
-      fetchReadyToGoFloorPlanData();
-
-      const fetchCustomFloorPlanData = async () => {
-        const response = await fetch(
-          `http://localhost:8088/customFloorPlans?userId=${appUser.id}&isFav=true`
-        );
-        const customFloorPlanListFromAPI = await response.json();
-        setCustomFloorPlanList(customFloorPlanListFromAPI);
-      };
-      fetchCustomFloorPlanData();
-    },
-    [favsChanged] // When this array is empty, you are observing initial component state
-  );
+      console.log("GET all expenses for a user", response);
+      if (!response.ok) {
+        window.alert("Error all expenses for a user");
+      } else {
+        const responseDataFromApi = await response.json();
+        console.log("all expenses for a user", responseDataFromApi);
+        setAllExpenses(responseDataFromApi);
+      }
+    };
+    getAllExpenses();
+  }, [isCreateExpense, refreshExpense]);
 
   return (
     <>
       <Box sx={{ width: "100%", height: "100%" }}>
         <Typography
-          variant="h3"
-          gutterBottom
-          sx={{ textAlign: "center", padding: "1rem" }}
-        >
-          Welcome to BizzExpense you are logged in as Employee
-        </Typography>
-        <Typography
           variant="h4"
           gutterBottom
-          sx={{ textAlign: "center", padding: "1rem", fontWeight: "bolder" }}
+          sx={{ textAlign: "left", marginLeft: "2%", marginTop: "2%" }}
         >
-          Expense Reports
+          {`Welcome ${appUser.user.firstName} ${appUser.user.lastName}`}
         </Typography>
-        <Accordion
-          expanded={true}
-          // expanded={expanded === "readyToGoPlans"}
-          onChange={accordingChangeHandler("readyToGoPlans")}
-          sx={{ padding: "0.5rem" }}
-        >
+        <Box sx={{ marginLeft: "2%", marginTop: "2%", height: "30%" }}>
+          <Button
+            sx={{
+              backgroundColor: "#a8dadc",
+              width: "30%",
+              height: "90%",
+              fontSize: "large",
+              fontWeight: "bold",
+              color: "#1f2421",
+              "&:hover": {
+                background: "#a8dadc",
+              },
+            }}
+            variant="contained"
+            onClick={() => {
+              setIsCreateExpense(true);
+            }}
+          >
+            <AddIcon
+              sx={{
+                height: "70%",
+                width: "70%",
+              }}
+            />
+          </Button>
+        </Box>
+
+        {isCreateExpense && (
+          <AddExpense returnToCaller={toggleCreateExpenseButton} />
+        )}
+
+        <Accordion sx={{ padding: "0.5rem" }}>
           <AccordionSummary
-            sx={{ background: "#b7efc5" }}
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
+            sx={{ background: "#457b9d", color: "#fff" }}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography sx={{ fontSize: "x-large", fontWeight: "bold" }}>
-              Latest Expense Reports
+              Previous Expense Reports
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <section className="floorplan--container">
-              {floorPlanList.map((floorPlan) => {
-                console.log("floorPlan", floorPlan);
-                return (
-                  <FloorPlans
-                    className="floorplan--item"
-                    key={floorPlan.readyToGoFloorPlan.id}
-                    floorPlan={floorPlan.readyToGoFloorPlan}
-                    isFav={true}
-                    setFavsChanged={setFavsChanged}
-                  />
-                );
-              })}
-            </section>
+          <AccordionDetails
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "flex-start",
+              alignContent: "center",
+              gap: "10px 30px",
+            }}
+          >
+            {allExpenses.map((x, index) => {
+              return (
+                <Expense
+                  key={index}
+                  expenseDetail={x}
+                  toggleRefreshExpense={toggleRefreshExpense}
+                />
+              );
+            })}
           </AccordionDetails>
         </Accordion>
-        {/* <Accordion
-          sx={{ padding: "0.5rem" }}
-          expanded={true}
-          // expanded={expanded === "customFloorPlans"}
-          onChange={accordingChangeHandler("customFloorPlans")}
-        >
-          <AccordionSummary
-            sx={{ background: "#b7efc5" }}
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography sx={{ fontSize: "x-large", fontWeight: "bold" }}>
-              Custom Floor Plans
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box sx={{ height: 400, width: "100%", padding: "1rem" }}>
-              <DataGrid
-                rows={customFloorPlanList}
-                columns={columns}
-                pageSize={5}
-                rowsPerPageOptions={[5]}
-                disableSelectionOnClick
-                initialState={{
-                  columns: { columnVisibilityModel: { id: false } },
-                }}
-                sx={{
-                  borderColor: "#181f1c",
-                  border: 2,
-                  boxShadow: 2,
-                  "& .MuiDataGrid-columnHeaders": {
-                    backgroundColor: "#d8f3dc",
-                    fontSize: "1rem",
-                    fontWeight: "bolder",
-                  },
-                  "& .MuiDataGrid-columnSeparator": {
-                    color: "#181f1c",
-                  },
-                  "& .MuiDataGrid-row:hover": {
-                    backgroundColor: "#f1f7ee",
-                    fontSize: "1.25rem",
-                    fontWeight: "bold",
-                  },
-                  bgcolor: "background.paper",
-                  overflow: "auto",
-                }}
-              />
-            </Box>
-          </AccordionDetails>
-        </Accordion> */}
       </Box>
     </>
   );
 };
+
+export default EmployeeHome;
