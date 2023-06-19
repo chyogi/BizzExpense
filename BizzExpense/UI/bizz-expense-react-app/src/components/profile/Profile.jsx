@@ -117,7 +117,7 @@ export default function Profile() {
   }, [userData]);
 
   return (
-    <Box sx={{ marginTop: "5%", width: "100vw", height: "100vh" }}>
+    <Box sx={{ marginTop: "5%", minWidth: "100vw", minHeight: "100vh" }}>
       <Typography sx={{ textAlign: "center" }} variant="h3" gutterBottom>
         User Profile
       </Typography>

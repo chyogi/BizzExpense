@@ -103,7 +103,7 @@ export const Register = () => {
   }, []);
 
   return (
-    <Box sx={{ height: "100vh", width: "100vw" }}>
+    <Box sx={{ minHeight: "100vh", minWidth: "100vw" }}>
       <main className="container--login">
         <h1 className="app--header">
           {" "}

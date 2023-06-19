@@ -59,7 +59,7 @@ export const Login = () => {
   };
 
   return (
-    <Box sx={{ height: "100vh", width: "100vw" }}>
+    <Box sx={{ minHeight: "100vh", minWidth: "100vw" }}>
       <main className="container--login">
         <h1 className="app--header">
           {" "}
@@ -130,16 +130,6 @@ export const Login = () => {
               Create an account
             </Link>
           </section>
-
-          {/* <section>
-          <Link
-            className="link--guest--user"
-            to="/"
-            onClick={guestUserClickHandler}
-          >
-            Continue Without Loging In
-          </Link>
-        </section> */}
         </section>
       </main>
       <Box

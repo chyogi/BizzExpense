@@ -339,7 +339,36 @@ export default function EditExpense(props) {
                   window.alert("Error updating expense");
                 }
               };
+              const updateExpenseStatusApiCall = async () => {
+                const options = {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    approvalStatusId: props.expenseDetail.approvalStatusId,
+                    expenseId: props.expenseDetail.expenseId,
+                    statusId: 1,
+                    comments: comments,
+                    approverId: props.expenseDetail.approverId,
+                    createdBy: props.expenseDetail.approvalCreatedByUserId,
+                    updatedBy: appUser.user.userId,
+                  }),
+                };
+
+                const response = await fetch(
+                  `http://localhost:8088/api/Expenses/ExpenseStatus/${props.expenseDetail.expenseId}`,
+                  options
+                );
+
+                console.log("PUT update expense api response", response);
+                if (!response.ok) {
+                  window.alert("Error updating expense");
+                }
+              };
+
               updateExpenseApiCall();
+              updateExpenseStatusApiCall();
               props.returnToCaller();
               props.toggleRefreshExpense();
             }}

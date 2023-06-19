@@ -1,23 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
-import { styled } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { FloorPlans } from "../floorPlans/FloorPlans";
 import "./Home.css";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -25,7 +9,6 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
-import { DataGrid } from "@mui/x-data-grid";
 import AddExpense from "../expenses/AddExpense";
 import Expense from "../expenses/Expense";
 
@@ -42,6 +25,7 @@ export const EmployeeHome = () => {
     setRefreshExpense(!refreshExpense);
   };
 
+  const [isPanel1Expanded, setIsPanel1Expanded] = useState(true);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -87,7 +71,7 @@ export const EmployeeHome = () => {
 
   return (
     <>
-      <Box sx={{ width: "100%", height: "100%" }}>
+      <Box sx={{ minWidthidth: "100vw", minHeight: "100vh" }}>
         <Typography
           variant="h4"
           gutterBottom
@@ -123,13 +107,18 @@ export const EmployeeHome = () => {
         </Box>
 
         {isCreateExpense && (
-          <AddExpense returnToCaller={toggleCreateExpenseButton} />
+          <AddExpense
+            returnToCaller={toggleCreateExpenseButton}
+            toggleRefreshExpense={toggleRefreshExpense}
+          />
         )}
 
-        <Accordion sx={{ padding: "0.5rem" }}>
+        <Accordion
+          sx={{ padding: "0.5rem" }}
+          expanded={isPanel1Expanded}
+          onChange={() => setIsPanel1Expanded(!isPanel1Expanded)}
+        >
           <AccordionSummary
-            expanded={expanded === "panel1"}
-            onChange={handleChange("panel1")}
             sx={{ background: "#457b9d", color: "#fff" }}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
