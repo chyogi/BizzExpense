@@ -272,12 +272,12 @@ export default function UpdateApproval(props) {
                   console.log(
                     "statusRefId",
                     expenseStatusTypesList.find(
-                      (x) => x.statusDescription === expenseStatusDescription
+                      (x) => x.statusDescription === expenseStatusSelected
                     ).statusRefId
                   );
                   setExpenseStatusId(
                     expenseStatusTypesList.find(
-                      (x) => x.statusDescription === expenseStatusDescription
+                      (x) => x.statusDescription === expenseStatusSelected
                     ).statusRefId
                   );
                 }}
@@ -342,7 +342,7 @@ export default function UpdateApproval(props) {
                 };
 
                 const response = await fetch(
-                  `http://localhost:8088/api/ExpenseStatus/${props.expenseDetail.expenseId}`,
+                  `http://localhost:8088/api/Expenses/ExpenseStatus/${props.expenseDetail.expenseId}`,
                   options
                 );
 

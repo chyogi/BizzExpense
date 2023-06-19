@@ -537,10 +537,11 @@ namespace BizzExpense.Repositories
                                               ,[UpdateTS] = @UpdateTS
                                               ,[UpdatedBy] = @UpdatedBy
                                          WHERE 
-                                                [ExpenseId] = @ExpenseId
+                                                [ApprovalStatusId] = @ApprovalStatusId
                                       ";
 
                     DbUtils.AddParameter(cmd, "@ExpenseId", approvalStatus.ExpenseId);
+                    DbUtils.AddParameter(cmd, "@ApprovalStatusId", approvalStatus.ApprovalStatusId);
                     DbUtils.AddParameter(cmd, "@StatusId", approvalStatus.StatusId);
                     DbUtils.AddParameter(cmd, "@Comments", approvalStatus.Comments);
                     DbUtils.AddParameter(cmd, "@ApproverId", approvalStatus.ApproverId);

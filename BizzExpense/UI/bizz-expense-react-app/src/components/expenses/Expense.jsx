@@ -61,7 +61,7 @@ export default function Expense(props) {
               setOpenDeleteModal(true);
             }}
           >
-            <DeleteOutlineOutlinedIcon />
+            <DeleteOutlineOutlinedIcon sx={{ color: "red" }} />
           </Button>
         </CardActions>
       </Card>
@@ -123,13 +123,13 @@ export default function Expense(props) {
             <Button
               fullWidth
               sx={{
-                backgroundColor: "#a8dadc",
+                backgroundColor: "#ef476f",
                 fontSize: "large",
                 fontWeight: "bold",
-                color: "#1f2421",
+                color: "#ffffff",
                 borderRadius: "25px",
                 "&:hover": {
-                  background: "#a8dadc",
+                  background: "#ef476f",
                 },
               }}
               variant="contained"

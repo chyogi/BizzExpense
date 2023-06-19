@@ -353,6 +353,7 @@ export default function AddExpense(props) {
               };
               addExpenseApiCall();
               props.returnToCaller();
+              props.toggleRefreshExpense();
             }}
           >
             Add Expense
@@ -373,6 +374,7 @@ export default function AddExpense(props) {
             onClick={() => {
               console.log("cancel expense creation");
               props.returnToCaller();
+              props.toggleRefreshExpense();
             }}
           >
             Cancel
